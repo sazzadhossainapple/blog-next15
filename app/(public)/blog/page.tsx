@@ -7,8 +7,8 @@ const Blog = async () => {
     const posts = await data.json();
 
     return (
-        <div>
-            <h1 className="text-3xl mt-4 mb-7 font-bold text-center">Blog</h1>
+        <div className="container mx-auto px-6 py-4 sm:py-6 lg:py-10">
+            <h1 className="text-3xl mb-7 font-bold text-center">Blog</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {posts?.map((data: any) => (
                     <ArticleCard key={data.id} article={data} />

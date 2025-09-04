@@ -4,7 +4,7 @@ import Link from 'next/link';
 const ArticleCard = ({ article }: any) => {
     return (
         <Link href={`/blog/${article.id}`} prefetch className="block">
-            <div className="bg-white shadow-md rounded-2xl max-w-md overflow-hidden">
+            <div className="bg-white shadow-md rounded-2xl max-w-md overflow-hidden h-full">
                 <Image
                     src="/demo_blog.png"
                     alt={article.title}

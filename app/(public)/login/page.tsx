@@ -59,7 +59,7 @@ const Login = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition "
+                            className="w-full bg-indigo-900 text-white py-2 rounded-lg hover:bg-purple-800 transition font-semibold cursor-pointer "
                         >
                             Sign In
                         </button>
@@ -69,7 +69,7 @@ const Login = () => {
                         Don't have an account?{' '}
                         <a
                             href="/register"
-                            className="text-blue-500 hover:underline"
+                            className="text-indigo-900 hover:underline"
                         >
                             Sign Up
                         </a>

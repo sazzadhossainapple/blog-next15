@@ -18,9 +18,7 @@ export default function DashboardLayout({
 }) {
     return (
         <html lang="en">
-            <body
-                className={`${poppins.className} min-h-screen bg-gray-50 text-gray-900`}
-            >
+            <body className={`min-h-screen bg-gray-50 text-gray-900`}>
                 {children}
             </body>
         </html>

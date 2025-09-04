@@ -10,7 +10,7 @@ export default function RootLayout({
     return (
         <div>
             <Header />
-            <main className="container mx-auto p-6">{children}</main>
+            <main>{children}</main>
             <Footer />
         </div>
     );
