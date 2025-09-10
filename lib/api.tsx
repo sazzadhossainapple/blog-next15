@@ -1,5 +1,5 @@
 // lib/api.ts
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Create an Axios instance
 const api = axios.create({
@@ -11,7 +11,7 @@ api.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         const token =
             typeof window !== 'undefined'
-                ? localStorage.getItem('token')
+                ? localStorage.getItem('blog-token')
                 : null;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -19,6 +19,20 @@ api.interceptors.request.use(
         return config;
     },
     (error) => Promise.reject(error)
+);
+
+// Response interceptor to handle authentication errors
+api.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            // Token is invalid or expired
+            localStorage.removeItem('blog-token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
 );
 
 export default api;

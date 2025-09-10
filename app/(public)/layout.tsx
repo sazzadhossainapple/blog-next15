@@ -1,7 +1,6 @@
 // app/layout.tsx
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Providers from '../providers';
 
 export default function RootLayout({
     children,
@@ -11,9 +10,7 @@ export default function RootLayout({
     return (
         <div>
             <Header />
-            <main>
-                <Providers>{children}</Providers>
-            </main>
+            <main>{children}</main>
             <Footer />
         </div>
     );

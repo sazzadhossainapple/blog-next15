@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
+import Providers from './providers';
+import { Toaster } from 'react-hot-toast';
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -19,7 +21,10 @@ export default function DashboardLayout({
     return (
         <html lang="en">
             <body className={`min-h-screen bg-gray-50 text-gray-900`}>
-                {children}
+                <Providers>
+                    {children}
+                    <Toaster position="top-right" reverseOrder={false} />
+                </Providers>
             </body>
         </html>
     );
