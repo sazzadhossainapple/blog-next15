@@ -1,37 +1,30 @@
+import { get } from '@/lib/apiClient';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export interface Vendor {
-    id: number;
+export interface User {
+    _id: string;
     name: string;
     email: string;
-    [key: string]: any;
+    image?: string;
+    phone?: string;
+    address?: string;
+    role: string;
+    status: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export interface VendorsResponse {
-    data: Vendor[];
-    total: number;
+export interface UsersResponse {
+    data: {
+        users: User[];
+        totalUserLists: number;
+    };
 }
 
-const fetchVendors = async (
-    page: number,
-    limit: number
-): Promise<VendorsResponse> => {
-    const { data } = await axios.get<VendorsResponse>(
-        'https://bksfs.nextgenitltd.com/api/vendors',
-        {
-            params: { page, limit },
-            headers: {
-                Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-            },
-        }
-    );
-    return data;
-};
-
-export const useVendors = (page: number, limit: number) => {
-    return useQuery<VendorsResponse, Error>({
-        queryKey: ['vendors', page, limit],
-        queryFn: () => fetchVendors(page, limit),
+export const useUsers = (page: number, limit: number) => {
+    return useQuery<UsersResponse, Error>({
+        queryKey: ['users', page, limit],
+        queryFn: () => get<UsersResponse>('/user', { page, limit }),
     });
 };

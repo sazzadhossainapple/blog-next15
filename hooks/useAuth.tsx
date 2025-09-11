@@ -45,7 +45,6 @@ export const loginUser = (payload: LoginPayload) => {
 
 export const fetchCurrentUser = async (): Promise<User> => {
     const res = await get<ApiResponse<User>>('/user/me');
-    console.log(res);
     return res.data; // unwrap the `data`
 };
 

@@ -39,7 +39,9 @@ const Pagination: React.FC<PaginationProps> = ({
                 'px-3 py-1 border rounded hover:bg-gray-200 cursor-pointer'
             }
             breakLinkClassName={'px-3 py-1 border rounded cursor-default'}
-            activeLinkClassName={'bg-blue-500 text-white'}
+            activeLinkClassName={
+                'bg-blue-900 text-white border border-blue-900 cursor-pointer'
+            }
             disabledLinkClassName={'opacity-50 cursor-not-allowed'}
         />
     );

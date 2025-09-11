@@ -1,6 +1,9 @@
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 export default function Loading() {
     return (
-        <div className="p-6">
+         <ProtectedRoute allowedRoles={['Admin']}>
+<div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Users</h1>
             <table className="w-full border-collapse bg-white rounded-lg shadow overflow-hidden">
                 <thead className="bg-gray-100 text-left">
@@ -31,5 +34,7 @@ export default function Loading() {
                 </tbody>
             </table>
         </div>
+         </ProtectedRoute>
+        
     );
 }
