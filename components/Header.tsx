@@ -32,6 +32,10 @@ export const headerData = {
             label: 'Contact',
             href: '/contact',
         },
+        {
+            label: 'Login',
+            href: '/login',
+        },
     ],
     showSearch: true,
 };

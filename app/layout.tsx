@@ -3,6 +3,8 @@ import './globals.css';
 import { Poppins } from 'next/font/google';
 import Providers from './providers';
 import { Toaster } from 'react-hot-toast';
+import { ModalProvider } from '@/context/ModalContext';
+import GlobalModal from '@/components/GlobalModal';
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -22,8 +24,11 @@ export default function DashboardLayout({
         <html lang="en">
             <body className={`min-h-screen bg-gray-50 text-gray-900`}>
                 <Providers>
-                    {children}
-                    <Toaster position="top-right" reverseOrder={false} />
+                    <ModalProvider>
+                        {children}
+                        <GlobalModal />
+                        <Toaster position="top-right" reverseOrder={false} />
+                    </ModalProvider>
                 </Providers>
             </body>
         </html>

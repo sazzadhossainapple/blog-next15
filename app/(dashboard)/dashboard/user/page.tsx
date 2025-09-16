@@ -7,10 +7,14 @@ import Pagination from '@/components/Pagination';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { User, useUsers } from '@/hooks/useUsers';
 import { FaRegEdit } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { IoIosAddCircle } from 'react-icons/io';
+import { useModal } from '@/context/ModalContext';
 export default function UserPage() {
     const [page, setPage] = useState(0); // zero-based for react-paginate
     const [limit, setLimit] = useState(10);
     const { data, isLoading, isError } = useUsers(page + 1, limit); // API uses 1-based page
+    // const { openModal } = useModal();
 
     console.log(data);
     if (isLoading) return <Loading />;
@@ -21,10 +25,27 @@ export default function UserPage() {
     const totalCount: number = data?.data?.totalUserLists || 0;
     const pageCount = Math.ceil(totalCount / limit);
 
+    // const openUserAddModal = () => {
+    //     openModal({
+    //         title: 'Add User',
+    //         content: 'hello',
+    //     });
+    // };
+
     return (
         <ProtectedRoute allowedRoles={['Admin']}>
             <div>
-                <h1 className="text-2xl font-bold mb-5">Users</h1>
+                <div className="md:flex items-center justify-between mb-5">
+                    <h1 className="text-2xl font-bold mb-5">Users</h1>
+                    {/* <button
+                        onClick={openUserAddModal}
+                        type="button"
+                        className="cursor-pointer inline-flex items-center justify-center gap-2 h-9 px-4 py-2 rounded-md border border-[#312c85] text-white bg-[#312c85] hover:text-white  transition-all"
+                    >
+                        <IoIosAddCircle />
+                        ADD
+                    </button> */}
+                </div>
                 <div className="mb-5 md:flex items-center justify-between">
                     <input
                         type="text"
@@ -91,9 +112,18 @@ export default function UserPage() {
                                     {user.address || 'N/A'}
                                 </td>
                                 <td className="p-3 border-b border-gray-300 text-gray-700 text-center">
-                                    <div>
-                                        <button type='button'>
-                                            <FaRegEdit />
+                                    <div className="flex items-center gap-1 justify-center">
+                                        {/* <button
+                                            type="button"
+                                            className="text-gray-600 cursor-pointer"
+                                        >
+                                            <FaRegEdit size={18} />
+                                        </button> */}
+                                        <button>
+                                            <MdDelete
+                                                size={20}
+                                                className="text-red-600 cursor-pointer"
+                                            />
                                         </button>
                                     </div>
                                 </td>

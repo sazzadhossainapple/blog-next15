@@ -1,44 +1,21 @@
-'use client';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-import { useLogin, LoginPayload } from '@/hooks/useAuth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface IFormInput {
     email: string;
     password: string;
 }
 
-const Login = () => {
-    const router = useRouter();
+const RegistrationPage = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<IFormInput>();
-    const loginMutation = useLogin(); // full mutation object
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        loginMutation.mutate(data as LoginPayload, {
-            onSuccess: (response) => {
-                localStorage.setItem('blog-token', response?.data?.token);
-                localStorage.setItem(
-                    'user',
-                    JSON.stringify(response.data?.userData)
-                );
-                toast.success(`Welcome ${response.data?.userData?.name}`);
-                // Get last visited path or fallback to /dashboard
-                const lastVisited =
-                    localStorage.getItem('lastVisitedPath') || '/dashboard';
-                router.replace(lastVisited);
-            },
-            onError: (error: any) => {
-                toast.error(error.response?.data?.message || 'Login failed');
-                console.log(error);
-            },
-        });
-    };
+    const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {};
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -86,18 +63,19 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        disabled={loginMutation.isPending}
+                        // disabled={loginMutation.isPending}
                         className="w-full bg-indigo-900 text-white py-2 rounded-lg hover:bg-purple-800 transition font-semibold"
                     >
-                        {loginMutation.isPending ? 'Signing In...' : 'Sign In'}
+                        {/* {loginMutation.isPending ? 'Signing In...' : 'Sign In'} */}
+                        Sign Up
                     </button>
                 </form>
 
-                <Link href="/registration">
+                <Link href="/login">
                     <p className="text-center mt-4 text-sm">
-                        Don&apos;t have an account?{' '}
+                        Already have an account?
                         <span className="text-indigo-900 font-semibold cursor-pointer underline">
-                            Register
+                            Login
                         </span>
                     </p>
                 </Link>
@@ -106,4 +84,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default RegistrationPage;
